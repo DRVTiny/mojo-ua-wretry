@@ -3,7 +3,7 @@ use 5.16.1;
 use strict;
 use warnings;
 use utf8; # for server messages containing utf8-symbols
-use Data::Dumper;
+#use Data::Dumper;
 
 use constant {
     MOJO_UA_MAX_RETRIES		=> 5,
@@ -31,7 +31,6 @@ BEGIN {
                                 MOJO_UA_RETRY_INTERVAL;
                     Mojo::IOLoop->timer(MOJO_UA_RETRY_INTERVAL() => sub {
                         say STDERR 'retrying request';
-                        print Dumper \@methodArgs;
                         $uaMethod->( @methodArgs )
                     })
                 } else {
