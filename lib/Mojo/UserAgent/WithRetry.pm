@@ -30,7 +30,7 @@ BEGIN {
                                 $res->error->{message},
                                 MOJO_UA_RETRY_INTERVAL;
                     Mojo::IOLoop->timer(MOJO_UA_RETRY_INTERVAL() => sub {
-                        say STDERR 'retrying request';
+                        $ENV{'MOJO_USERAGENT_DEBUG'} and say STDERR 'retrying request' ;
                         $uaMethod->( @methodArgs )
                     })
                 } else {
