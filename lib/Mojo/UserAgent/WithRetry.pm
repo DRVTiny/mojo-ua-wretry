@@ -13,7 +13,7 @@ use base 'Mojo::UserAgent';
 
 BEGIN {
     no strict 'refs';
-    for my $rqType (qw/get post put delete/) {
+    for my $rqType (qw/get post put delete patch/) {
         *{__PACKAGE__ . '::' . $rqType . '_with_retry'} = sub {
             my $self = $_[0];
             my $uaMethod = $self->can($rqType)
@@ -39,7 +39,7 @@ BEGIN {
                 }
             };
             @methodArgs = @_;
-            &{$uaMethod}
+            goto &{$uaMethod}
         }
     }
 }
